@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -20,8 +21,10 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
-  FlutterInsta flutterInsta = FlutterInsta(); // create instance of FlutterInsta class
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  FlutterInsta flutterInsta =
+      FlutterInsta(); // create instance of FlutterInsta class
   TextEditingController usernameController = TextEditingController();
   TextEditingController reelController = TextEditingController();
   TabController? tabController;
@@ -40,12 +43,14 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   void initializeDownloader() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await FlutterDownloader.initialize(debug: true // optional: set false to disable printing logs to console
+    await FlutterDownloader.initialize(
+        debug: true // optional: set false to disable printing logs to console
         );
   }
 
   void downloadReels() async {
-    var s = await flutterInsta.downloadReels("https://www.instagram.com/p/CDlGkdZgB2y");
+    var s = await flutterInsta
+        .downloadReels("https://www.instagram.com/p/CDlGkdZgB2y");
     print(s);
   }
 
@@ -145,7 +150,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                 padding: EdgeInsets.only(top: 10),
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(
                                     "$followers\nFollowers",
@@ -209,7 +215,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         ),
         downloading
             ? Center(
-                child: CircularProgressIndicator(), //if downloading is true show Progress Indicator
+                child:
+                    CircularProgressIndicator(), //if downloading is true show Progress Indicator
               )
             : Container()
       ],
@@ -225,7 +232,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       savedDir: '/sdcard/Download',
       showNotification: true,
       // show download progress in status bar (for Android)
-      openFileFromNotification: true, // click on notification to open downloaded file (for Android)
+      openFileFromNotification:
+          true, // click on notification to open downloaded file (for Android)
     ).whenComplete(() {
       setState(() {
         downloading = false; // set to false to stop Progress indicator
